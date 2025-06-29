@@ -4,6 +4,7 @@ import FilterByPrice from './filterAndSearch/FilterByPrice';
 import FilterByColor from './filterAndSearch/FilterByColor';
 import FilterByTags from './filterAndSearch/FilterByTags';
 import ResetFilters from './filterAndSearch/ResetFilters';
+import { scrollOnFilter } from '../../components/ScrollToTop';
 
 const FilterOnProducts = ({ data, setFilteredData, setTotalProducts, selectedCategory }) => {
 
@@ -46,26 +47,30 @@ const FilterOnProducts = ({ data, setFilteredData, setTotalProducts, selectedCat
         setTotalProducts(data.length);
         setMinPrice('');
         setMaxPrice('');
+        scrollOnFilter();
     };
 
     const handleCategoryClick = (category) => {
         const filtered = data.filter(d => d.category === category);
         setFilteredData(filtered);
         setTotalProducts(filtered.length);
+        scrollOnFilter();
     };
 
     const handleColorClick = (color) => {
         const filtered = data.filter(d => d.color === color);
         setFilteredData(filtered);
         setTotalProducts(filtered.length);
+        scrollOnFilter();
     };
 
     const handleTagClick = (tag) => {
         const filtered = data.filter(d => d.tag === tag);
         setFilteredData(filtered);
         setTotalProducts(filtered.length);
+        scrollOnFilter();
     };
-    
+
     const handlePriceChange = () => {
         let filtered = data;
         if (minPrice) {
@@ -76,6 +81,7 @@ const FilterOnProducts = ({ data, setFilteredData, setTotalProducts, selectedCat
         }
         setFilteredData(filtered);
         setTotalProducts(filtered.length);
+        scrollOnFilter();
     };
 
     return (

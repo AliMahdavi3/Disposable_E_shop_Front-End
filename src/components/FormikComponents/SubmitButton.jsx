@@ -8,7 +8,7 @@ const SubmitButton = ({ setOpen }) => {
                 return (
                     <div className='flex justify-start mt-5 items-center'>
                         <button type='submit' className='text-white cursor-pointer bg-mgreen 
-                        px-3 py-2 rounded-md font-medium' disabled={form.isSubmitting}>
+                            px-3 py-2 rounded-md font-medium' disabled={form.isSubmitting}>
                             ذخیره
                             {/* {form.isSubmitting ? <SpinnerLoad isSmall={true} /> : 'ذخیره'} */}
                         </button>

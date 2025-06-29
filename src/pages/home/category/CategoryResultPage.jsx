@@ -54,7 +54,7 @@ const CategoryResultPage = () => {
                             </NavLink>
                         </div>
                         <hr className='border border-gray-300 my-5' />
-                        <div className='grid grid-cols-4 gap-5'>
+                        <div className='grid grid-cols-4 gap-1 md:gap-3'>
                             {products.length > 0 ? (
                                 products.map(product => (
                                     <ProductCard

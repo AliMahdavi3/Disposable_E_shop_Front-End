@@ -1,4 +1,5 @@
 import React from 'react'
+import { apiPath } from '../../../services/httpService'
 
 const ImageSection = ({ data }) => {
     return (
@@ -9,7 +10,7 @@ const ImageSection = ({ data }) => {
                         <img
                             key={index}
                             className='box_shadow cursor-pointer rounded-xl me-2 w-full'
-                            src={"http://localhost:4000/" + imageUrl}
+                            src={`${apiPath}/${imageUrl}`}
                             alt={`Product ${index + 1}`}
                         />
                     ))}
@@ -18,7 +19,7 @@ const ImageSection = ({ data }) => {
 
             <div className="hidden md:block col-span-5 md:col-span-2 rounded-xl">
                 <img
-                    src={"http://localhost:4000/" + data.product.imageUrl[0]}
+                    src={`${apiPath}/${data.product.imageUrl[0]}`}
                     className='box_shadow hover:shadow-2xl cursor-pointer rounded-xl mb-5'
                     alt={data.product.title}
                 />
@@ -27,8 +28,9 @@ const ImageSection = ({ data }) => {
                     {data.product.imageUrl.slice(1, 4).map((imageUrl, index) => (
                         <img
                             key={index}
-                            className='col-span-1 box_shadow hover:shadow-2xl cursor-pointer rounded-xl'
-                            src={"http://localhost:4000/" + imageUrl}
+                            className='col-span-1 box_shadow hover:shadow-2xl 
+                            cursor-pointer rounded-xl'
+                            src={`${apiPath}/${imageUrl}`}
                             alt={data.product.title}
                         />
                     ))}

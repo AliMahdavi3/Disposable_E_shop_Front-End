@@ -12,7 +12,7 @@ const ProductsSection = ({ setOpen, cartItems, setCurrentItem, handleDeleteItemF
                         <div
                             key={index}
                             className='flex justify-between items-center mt-2
-                        rounded-xl border-2 border-gray-300 py-2 px-2'
+                            rounded-xl border-2 border-gray-300 py-2 px-2'
                         >
                             <img
                                 className='w-[15%] md:w-[10%] rounded-lg border-2'

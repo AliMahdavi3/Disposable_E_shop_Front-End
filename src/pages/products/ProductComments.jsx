@@ -1,23 +1,23 @@
 import React, { useCallback, useEffect, useState } from 'react'
-import { getArticleCommentsService, postArticleCommentService } from '../../services/blog';
+import { createProductCommentService, getProductCommentService } from '../../services/product';
 import CommentsList from '../../components/commentsComponents/CommentsList';
 import SendingComment from '../../components/commentsComponents/SendingComment';
 import { Alert } from '../../utils/sweetalert2';
 
-const ArticleComments = ({ articleId }) => {
+const ProductComments = ({ productId }) => {
 
-    const [comments, setComments] = useState([]);
     const [newComment, setNewComment] = useState('');
+    const [comments, setComments] = useState([]);
     const [rating, setRating] = useState(0);
 
     const fetchComments = useCallback(async () => {
         try {
-            const res = await getArticleCommentsService(articleId);
-            setComments(res.data.articleComments);
+            const res = await getProductCommentService(productId);
+            setComments(res.data.productComments);
         } catch (error) {
             console.error('Error fetching comments:', error);
         }
-    }, [articleId]);
+    }, [productId]);
 
     useEffect(() => {
         fetchComments();
@@ -39,11 +39,10 @@ const ArticleComments = ({ articleId }) => {
             event.preventDefault();
             const commentData = {
                 content: newComment,
+                ...(rating > 0 && { rating }),
             };
-            if (rating > 0) {
-                commentData.rating = rating;
-            }
-            const res = await postArticleCommentService(articleId, commentData);
+
+            const res = await createProductCommentService(productId, commentData);
             if (res.status === 201) {
                 Alert('عملیات موفقیت آمیز بود', 'نظر شما ارسال شد!', 'success');
                 fetchComments();
@@ -52,7 +51,7 @@ const ArticleComments = ({ articleId }) => {
             }
         } catch (error) {
             console.error('Error submitting comment:', error);
-            Alert('خطایی رخ داده است', error.message, 'error');
+            Alert('خطایی رخ داده است!', error.message, 'error')
         }
     };
 
@@ -61,12 +60,13 @@ const ArticleComments = ({ articleId }) => {
             <div className='my-5'>
                 <div className='bg-mgreen text-white font-medium w-[60%] text-xs 
                     md:text-sm lg:w-[20%] text-center py-2 rounded-t-lg'>
-                    دیدگاه ها درباره این مقاله
+                    دیدگاه ها درباره این محصول
                 </div>
                 <hr className="border-2 border-mgreen" />
             </div>
 
             <CommentsList comments={comments} getRatingLabel={getRatingLabel} />
+
             <SendingComment
                 handleCommentSubmit={handleCommentSubmit}
                 newComment={newComment}
@@ -78,4 +78,4 @@ const ArticleComments = ({ articleId }) => {
     )
 }
 
-export default ArticleComments
+export default ProductComments

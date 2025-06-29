@@ -3,7 +3,7 @@ import Footer from '../../components/Footer'
 import TitleAndImageSection from './TitleAndImageSection'
 import NewsMembership from './NewsMembership'
 import SocialMedia from './SocialMedia'
-import GoogleMap from './GoogleMap'
+// import GoogleMap from './GoogleMap'
 import TicketToSupport from './ticketSystem/TicketToSupport'
 
 const ContactUs = () => {
@@ -17,7 +17,7 @@ const ContactUs = () => {
                 </div>
             </div>
             <SocialMedia />
-            <GoogleMap />
+            {/* <GoogleMap /> */}
             <Footer />
         </>
     )

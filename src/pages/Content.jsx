@@ -11,7 +11,6 @@ import Profile from './user-profile/Profile';
 import Login from './auth/login/Login';
 import Register from './auth/register/Register';
 import SingleArticle from './blog/SingleArticle';
-import ScrollToTop from '../components/ScrollToTop';
 import CategoryResultPage from './home/category/CategoryResultPage';
 import SearchResultPage from './home/search/SearchResultPage';
 import ForgotPassword from './auth/addition/ForgotPassword';
@@ -19,13 +18,13 @@ import ResetPassword from './auth/addition/ResetPassword';
 import Redirect from './auth/addition/Redirect';
 import Checkout from './cart/order/Checkout';
 import PaymentConfirmation from './cart/order/PaymentConfirmation';
+import { useScrollOnNavigation } from '../components/ScrollToTop';
 
 
 const Content = () => {
-
+  useScrollOnNavigation();
   return (
     <section>
-      <ScrollToTop />
       <Routes>
 
         <Route path='/' element={<Home />} />

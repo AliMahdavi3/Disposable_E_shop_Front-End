@@ -10,7 +10,7 @@ const GoogleMap = () => {
                     width="100%" height="450" style={{ borderRadius: '30px' }} allowfullscreen=""
                     loading="lazy"
                     referrerpolicy="no-referrer-when-downgrade"
-                    title="Google Maps location of our office" // Add a title here
+                    title="Google Maps location of our office"
                 ></iframe>
             </div>
         </div>

@@ -1,6 +1,5 @@
 import React, { useEffect, useState } from 'react'
 import Footer from '../../components/Footer';
-import SupportOrHelp from './SupportOrHelp';
 import Logout from './Logout';
 import { useNavigate } from 'react-router-dom';
 import useSolidNavbar from '../../hooks/useSolidNavbar';
@@ -11,6 +10,7 @@ import EmailConfirmation from './profile/EmailConfirmation';
 import ProfileList from './profile/ProfileList';
 import OrdersHistory from './orders/OrdersHistory';
 import OrderDetails from './orders/OrderDetails';
+import Support from './support/Support';
 
 
 const Profile = () => {
@@ -20,7 +20,6 @@ const Profile = () => {
     const [activeSection, setActiveSection] = useState('ordersHistory');
     const [userData, setUserData] = useState({ phone: '', });
     const [currentOrderId, setCurrentOrderId] = useState(null);
-
 
     useEffect(() => {
         const token = localStorage.getItem('token');
@@ -32,8 +31,10 @@ const Profile = () => {
     useEffect(() => {
         const fetchUserData = async () => {
             try {
-                const response = await getUserService();
-                setUserData(response.data.user);
+                const res = await getUserService();
+                if (res.status === 200) {
+                    setUserData(res.data.user);
+                }
             } catch (error) {
                 console.error('Error fetching user data:', error);
             }
@@ -57,7 +58,7 @@ const Profile = () => {
             case 'userInfo':
                 return <UserInfo />;
             case 'support':
-                return <SupportOrHelp />;
+                return <Support />;
             case 'logout':
                 return <Logout />;
             default:

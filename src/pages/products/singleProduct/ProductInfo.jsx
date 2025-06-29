@@ -12,8 +12,8 @@ const ProductInfo = ({ data }) => {
         )
     }
     return (
-        <div className='px-10'>
-            <h5 className='py-3 text-mgreen'>مشخصات کالا : </h5>
+        <div className='container text-xs md:text-sm'>
+            <h5 className='py-3 text-mgreen'>مشخصات کالا</h5>
             <div className='lg:flex justify-between items-center'>
                 <Info label={'ابعاد : '} value={data.product.size} />
                 <Info label={'وزن : '} value={data.product.weight} />

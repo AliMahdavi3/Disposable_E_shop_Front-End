@@ -1,27 +1,32 @@
-import { Form, Formik } from 'formik'
-import React, { useEffect, useState } from 'react'
-import FormikControl from '../../../components/FormikComponents/FormikControl'
-import { initialValues, onSubmit, validationSchema } from './core/ticketCore'
-import { getUserService } from '../../../services/contactUs'
+import { Form, Formik } from 'formik';
+import React, { useEffect, useState } from 'react';
+import FormikControl from '../../../components/FormikComponents/FormikControl';
+import { initialValues, onSubmit, validationSchema } from './core/ticketCore';
+import { getUserService } from '../../../services/contactUs';
+import { useNavigate } from 'react-router-dom';
 
 const TicketToSupport = () => {
     const [userData, setUserData] = useState(null);
     const [reInitialValues, setReInitialValues] = useState(null);
+    const token = localStorage.getItem('token');
+    const navigate = useNavigate();
 
     useEffect(() => {
-        const handleFetchUserInfo = async () => {
-            try {
-                const res = await getUserService();
-                if (res.status === 200) {
-                    setUserData(res.data.user);
-                    console.log(res.data.user);
+        if (token) {
+            const handleFetchUserInfo = async () => {
+                try {
+                    const res = await getUserService();
+                    if (res.status === 200) {
+                        setUserData(res.data.user);
+                        console.log(res.data.user);
+                    }
+                } catch (error) {
+                    console.log(error);
                 }
-            } catch (error) {
-                console.log(error);
             }
+            handleFetchUserInfo();
         }
-        handleFetchUserInfo();
-    }, []);
+    }, [token]);
 
     useEffect(() => {
         if (userData) {
@@ -33,6 +38,8 @@ const TicketToSupport = () => {
                 description: "",
                 image: [],
             });
+        } else {
+            setReInitialValues(initialValues);
         }
     }, [userData]);
 
@@ -41,7 +48,7 @@ const TicketToSupport = () => {
         <Formik
             initialValues={reInitialValues || initialValues}
             onSubmit={(values, actions) => onSubmit(values, actions)}
-            validationSchema={validationSchema}
+            validationSchema={token ? validationSchema : null}
             enableReinitialize
         >
             {formik => {
@@ -92,6 +99,7 @@ const TicketToSupport = () => {
                             </div>
 
                             <FormikControl
+                                className={'py-2 px-5 rounded-3xl bg-blue-600 bg-opacity-25'}
                                 control="textarea"
                                 formik={formik}
                                 name="description"
@@ -101,22 +109,38 @@ const TicketToSupport = () => {
                                 placeholder="توضیحات"
                             />
 
-                            <FormikControl
-                                control="file"
-                                formik={formik}
-                                name="image"
-                                placeholder=". حداکثر 5 تصویر"
-                                isMultiple={true}
-                            />
-                            <button
-                                type='submit'
-                                className={`w-1/3 mt-3 rounded-full text-white bg-blue-600
-                                font-medium bg-opacity-60 text-sm hover:bg-violet-700 py-3
-                                ${!formik.values.subject || !formik.values.description ?
-                                        "disabled" : null}`}
-                            >
-                                ارسال پیام
-                            </button>
+                            {
+                                token ? (
+                                    <>
+                                        <FormikControl
+                                            control="file"
+                                            formik={formik}
+                                            name="image"
+                                            placeholder=". حداکثر 5 تصویر"
+                                            isMultiple={true}
+                                        />
+                                        <button
+                                            type='submit'
+                                            className={`w-1/3 mt-3 rounded-full 
+                                            text-white bg-blue-600
+                                            font-medium bg-opacity-60 text-sm
+                                            hover:bg-violet-700 py-3
+                                            ${!formik.values.subject ||
+                                                    !formik.values.description ?
+                                                    "disabled" : null}`}
+                                        >
+                                            ارسال پیام
+                                        </button>
+                                    </>
+                                ) : (
+                                    <button
+                                        onClick={() => navigate('/login')}
+                                        className='bg-blue-500 text-white px-4 py-2
+                                        rounded-full text-xs md:text-base'>
+                                        برای ارسال تیکت لطفا وارد حساب خود شوید
+                                    </button>
+                                )
+                            }
                         </Form>
                     </div>
                 )

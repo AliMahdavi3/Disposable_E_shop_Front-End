@@ -13,6 +13,14 @@ export const getSingleArticleService = (articleId) => {
     return httpService(`/api/articles/${articleId}`, 'get');
 }
 
-export const patchArticleLikeService = (articleId) => {
-    return httpService(`/api/articles/${articleId}/likes`, 'patch');
+export const patchArticleLikeService = (articleId, data) => {
+    return httpService(`/api/articles/${articleId}/likes`, 'patch', data);
+}
+
+export const getArticleCommentsService = (articleId) => {
+    return httpService(`/api/articles/${articleId}/comments`, 'get');
+}
+
+export const postArticleCommentService = (articleId, data) => {
+    return httpService(`/api/articles/${articleId}/comments`, 'post', data)
 }

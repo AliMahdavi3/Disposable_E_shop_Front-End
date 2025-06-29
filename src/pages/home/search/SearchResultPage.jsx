@@ -68,7 +68,7 @@ const SearchResultPage = () => {
                                     md:text-base font-medium">
                                     محصولات
                                 </h3>
-                                <div className='grid grid-cols-4 gap-5'>
+                                <div className='grid grid-cols-4 gap-1 md:gap-2'>
                                     {results.products.map(product => (
                                         <ProductCard
                                             key={product._id}
@@ -86,7 +86,7 @@ const SearchResultPage = () => {
                                         md:text-base font-medium">
                                         مقالات
                                     </h3>
-                                    <div className='grid grid-cols-3 gap-5'>
+                                    <div className='grid grid-cols-3 gap-1 md:gap-3'>
                                         {results.articles.map(article => (
                                             <ArticleCard key={article._id} article={article} />
                                         ))}

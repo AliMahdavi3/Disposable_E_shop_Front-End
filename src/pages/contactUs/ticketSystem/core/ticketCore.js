@@ -12,6 +12,7 @@ export const initialValues = {
     image: [],
 };
 
+
 export const onSubmit = async (values, actions) => {
     try {
         const res = await createNewTicketService(values);

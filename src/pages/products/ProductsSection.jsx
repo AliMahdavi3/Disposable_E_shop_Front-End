@@ -5,6 +5,7 @@ import SpinnerLoad from '../../components/SpinnerLoad';
 import Pagination from '../../components/Pagination';
 import FilterOnProducts from './FilterOnProducts';
 import SearchBox from './filterAndSearch/SearchBox';
+import { scrollOnFilter } from '../../components/ScrollToTop';
 
 const ProductsSection = ({ itemsPerPage, selectedCategory }) => {
 
@@ -52,7 +53,7 @@ const ProductsSection = ({ itemsPerPage, selectedCategory }) => {
     const handlePageChange = (newPage) => {
         if (newPage >= 1 && newPage <= pageCount) {
             setCurrentPage(newPage);
-            window.scrollTo({ top: 590, behavior: 'smooth' });
+            scrollOnFilter();
         }
     };
 
@@ -64,10 +65,10 @@ const ProductsSection = ({ itemsPerPage, selectedCategory }) => {
                         <SpinnerLoad />
                     </div>
                 ) : (
-                    <div className="grid grid-cols-4 gap-4">
+                    <div className="grid grid-cols-4 gap-1 md:gap-2">
                         <div className='col-span-4 md:col-span-3'>
                             <SearchBox setSearchTerm={setSearchTerm} />
-                            <div className='grid grid-cols-3 gap-4'>
+                            <div className='grid grid-cols-4 gap-1 md:gap-2'>
                                 {
                                     Array.isArray(currentItems) ?
                                         currentItems.map((product) => (
@@ -78,7 +79,7 @@ const ProductsSection = ({ itemsPerPage, selectedCategory }) => {
                                         )) : null
                                 }
                             </div>
-                            <div>
+                            <div className='mb-4 md:mb-0'>
                                 <Pagination
                                     currentPage={currentPage}
                                     pageCount={pageCount}

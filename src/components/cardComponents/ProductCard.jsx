@@ -2,98 +2,81 @@ import React from 'react'
 import { FaStar } from 'react-icons/fa'
 import { apiPath } from '../../services/httpService'
 
-const ProductCard = ({ product, shift, handleRemoveFavorite, colSpan }) => {
+const ProductCard = ({ product, colSpan }) => {
     return (
-        <div className={`md:col-span-1 h-fit box_shadow rounded-lg
-            hover:shadow-lg bg-white bg-opacity-50 cursor-pointer
-            ${shift ? "md:items-center py-3 mb-2" : ""} ${colSpan ? "col-span-4" : "col-span-3"} 
-            ${product.available ? ' hover:shadow-[#17907F]' : ' hover:shadow-rose-500'}`}>
-
-            <a href={`/products/${product._id}`} target='_blank' rel='noopener noreferrer'>
-                <img className='h-2/3 w-full'
-                    src={`${apiPath}/${product.imageUrl[1]}`} alt={product.title} />
+        <div className={`lg:col-span-1 h-fit box_shadow rounded-lg
+            hover:shadow-lg bg-white bg-opacity-50 cursor-pointer col-span-2 
+            ${product.available ? ' hover:shadow-[#17907F]' : ' hover:shadow-rose-500'}`}
+        >
+            <a
+                href={`/products/${product._id}`}
+                target='_blank'
+                rel='noopener noreferrer'
+            >
+                <img
+                    src={`${apiPath}/${product.imageUrl[1]}`}
+                    className='h-2/3 w-full'
+                    alt={product.title}
+                />
             </a>
 
-            <div className='px-5 text-mblack'>
-                <a href={`/products/${product._id}`}
-                    target='_blank' rel='noopener noreferrer'>
-                    <h3 className={`font-medium 
-                        ${shift ? "text-xs lg:text-base" : "lg:text-xl"}`}>
+            <div className='px-3 lg:px-5 text-gray-500'>
+                <a
+                    href={`/products/${product._id}`}
+                    target='_blank'
+                    rel='noopener noreferrer'
+                >
+                    <h3 className={`font-medium text-xs lg:text-base`}>
                         {product.title}
                     </h3>
 
-                    <p className='py-5 text-xs lg:text-base text-gray-600 
+                    <p className='py-2 lg:py-4 text-xs text-gray-500 
                         font-medium truncate'>
                         {product.content}
                     </p>
 
-                    <div className='flex justify-between'>
-                        <p>
+                    <div className='flex flex-col lg:flex-row justify-between items-start
+                        lg:items-center'>
+                        <p className='font-medium text-xs'>
                             {
                                 product.available ? (
-                                    <span className='font-medium text-xs 
-                                    md:text-sm text-green-800'>
+                                    <span className='text-green-800'>
                                         موجود است
                                     </span>
                                 ) : (
-                                    <span className='font-medium text-xs 
-                                    md:text-sm text-rose-600'>
+                                    <span className='text-rose-600'>
                                         موجود نیست
                                     </span>
                                 )
                             }
                         </p>
-                        {
-                            shift ? (
-                                <p className='flex flex-col items-end'>
-                                    <span className='mx-2 font-medium text-xs'>
-                                        {product.price}
-                                    </span>
-                                    <span className='text-xs'>
-                                        تومان
-                                    </span>
-                                </p>
-                            ) : (
-                                <p className='flex justify-end text-xs lg:text-base'>
-                                    <span>
-                                        {product.rating}
-                                    </span>
-                                    <FaStar className='ms-2 text-amber-500' />
-                                </p>
-                            )
-                        }
-                    </div>
 
+                        <p className='flex justify-end text-xs lg:text-sm'>
+                            <span>
+                                {product.rating}
+                            </span>
+                            <FaStar className='ms-2 text-amber-500' />
+                        </p>
+                    </div>
                 </a>
 
-                <div className='flex justify-between items-center py-5'>
+                <div className='flex justify-between items-center py-2 lg:py-5'>
 
                     <a href={`/products/${product._id}`}
                         target='_blank' rel='noopener noreferrer'>
                         <button className={`hover:bg-violet-700 cursor-pointer 
-                                py-1 bg-[#007274] text-xs text-white px-3 rounded-md
-                                ${!shift ? "lg:px-5 lg:text-base" : ""}`}>
+                            py-1 bg-[#007274] text-xs text-white px-3 rounded-md`}>
                             خرید
                         </button>
                     </a>
-                    {
-                        shift ? (
-                            <button className='hover:bg-violet-700 cursor-pointer mx-2 
-                                py-1 bg-rose-600 text-xs text-white px-3 rounded-md'
-                                onClick={() => handleRemoveFavorite(product._id)}
-                            >
-                                حذف
-                            </button>
-                        ) : (
 
-                            <p className='flex items-center'>
-                                <span className='mx-2 font-medium text-xs lg:text-base'>
-                                    {product.price}
-                                </span>
-                                <span className='text-xs'>تومان</span>
-                            </p>
-                        )
-                    }
+                    <p className='flex flex-col lg:flex-row items-end lg:items-center'>
+                        <span className='text-xs'>تومان</span>
+                        <span className='ms-2 font-medium text-xs lg:text-sm'>
+                            {product.price}
+                        </span>
+                    </p>
+
                 </div>
             </div>
         </div>

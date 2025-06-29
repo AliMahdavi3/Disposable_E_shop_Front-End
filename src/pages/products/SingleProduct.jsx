@@ -12,8 +12,8 @@ import QuantityPriceAvailable from './singleProduct/QuantityPriceAvailable';
 import Content from './singleProduct/Content';
 import useSolidNavbar from '../../hooks/useSolidNavbar';
 import { getSingleProductService } from '../../services/product';
-import ProductComments from './productComment/ProductComments';
 import RelatedProducts from './carousels/RelatedProducts';
+import ProductComments from './ProductComments';
 
 
 const SingleProduct = () => {
@@ -21,7 +21,7 @@ const SingleProduct = () => {
     let { productId } = useParams();
     const [data, setData] = useState(null);
     const [quantity, setQuantity] = useState(1);
-
+    const token = localStorage.getItem('token');
     useSolidNavbar(true);
 
     useEffect(() => {
@@ -61,6 +61,7 @@ const SingleProduct = () => {
                                         <AddToFavorites
                                             data={data}
                                             productId={productId}
+                                            token={token}
                                         />
                                         <ViewAndDate data={data} />
                                     </div>
@@ -76,9 +77,10 @@ const SingleProduct = () => {
                                     data={data}
                                     productId={productId}
                                     quantity={quantity}
+                                    token={token}
                                 />
 
-                                <hr className='border-2 border-gray-300 mt-10 mb-5' />
+                                <hr className='border-2 border-gray-300 mt-7' />
                                 <ProductInfo data={data} />
 
                             </div>

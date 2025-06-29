@@ -1,14 +1,15 @@
-import { useEffect } from 'react'
-import { useLocation } from 'react-router-dom'
+import { useEffect } from 'react';
+import { useLocation } from 'react-router-dom';
 
-const ScrollToTop = () => {
+export const useScrollOnNavigation = (scrollPosition = 0) => {
+  const { pathname } = useLocation();
 
-    const { pathname } = useLocation();
-    useEffect(() => {
-        window.scrollTo(0, 0);
-    }, [pathname]);
+  useEffect(() => {
+    window.scrollTo({ top: scrollPosition, behavior: 'smooth' });
+  }, [pathname, scrollPosition]);
+};
 
-  return null;
-}
-
-export default ScrollToTop
+export const scrollOnFilter = () => {
+  const topPosition = window.innerWidth <= 768 ? 440 : 510;
+  window.scrollTo({ top: topPosition, behavior: 'smooth' });
+};

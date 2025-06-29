@@ -1,8 +1,8 @@
 import React, { useEffect, useState } from 'react'
-import ProductCard from '../../../components/cardComponents/ProductCard';
 import Pagination from '../../../components/Pagination';
 import { deleteFavoritesService, getFavoritesService } from '../../../services/profile';
 import { Alert, Confirm } from '../../../utils/sweetalert2';
+import ProductCartList from './ProductCartList';
 
 const Favorites = () => {
 
@@ -59,33 +59,29 @@ const Favorites = () => {
     };
 
     return (
-        <section className="border-2 mt-5 px-5 py-5 rounded-lg max-h-[90vh] overflow-y-auto">
-            <h3 className='font-medium text-rose-700 pb-5 mb-2 border-b-4 border-b-red-400'>لیست علاقه مندی</h3>
-            <div className='grid grid-cols-3 gap-4'>
-                {
-                    favList.length > 0 ? favList.map((product) => (
-                        <ProductCard
-                            product={product}
-                            shift={true}
-                            handleRemoveFavorite={handleRemoveFavorite}
+        <section className="border-2 mt-5 px-2 py-2 rounded-lg h-[64vh] overflow-y-auto">
+            {
+                favList.length > 0 ? favList.map((product) => (
+                    <ProductCartList
+                        handleRemoveFavorite={handleRemoveFavorite}
+                        product={product}
+                    />
+                )) : (
+                    <div className='col-span-3 flex flex-col justify-center items-center mt-10'>
+                        <img className='w-[25%] border-4 rounded-full'
+                            src="/assets/images/profile/favorites.png"
+                            alt="orders"
                         />
-                    )) : (
-                        <div className='col-span-3 flex flex-col justify-center items-center mt-10'>
-                            <img className='w-[25%] border-4 rounded-full'
-                                src="/assets/images/profile/favorites.png"
-                                alt="orders"
-                            />
-                            <p className='mt-2 text-xs md:text-lg font-medium text-rose-500'>
-                                هنوز محصولی به لیست اضافه نکرده اید!
-                            </p>
-                        </div>
-                    )
-                }
-            </div>
+                        <p className='mt-2 text-xs md:text-lg font-medium text-rose-500'>
+                            هنوز محصولی به لیست اضافه نکرده اید!
+                        </p>
+                    </div>
+                )
+            }
 
             {
                 favList.length > 0 ? (
-                    <div className='mt-5'>
+                    <div className='pb-1'>
                         <Pagination
                             currentPage={currentPage}
                             pageCount={pageCount}

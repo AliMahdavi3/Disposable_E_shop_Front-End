@@ -17,7 +17,8 @@ const QuantityPriceAvailable = ({ quantity, setQuantity, data }) => {
         }
     };
     return (
-        <div className='flex justify-between items-center md:flex-row flex-col py-10 px-10'>
+        <div className='flex justify-between items-center md:flex-row flex-col 
+            pt-10 pb-5 md:py-10 px-10'>
             <div className="flex items-center justify-center md:justify-start mb-5">
                 <button
                     className="bg-white text-amber-500 p-1 md:p-2 rounded-md
